@@ -1,0 +1,15 @@
+package com.aicte.enums;
+
+public enum EvcStatus {
+    EVC_REQUIRED,
+    MEMBERS_ASSIGNED,
+    DATE_PROPOSED,
+    DATE_CONFIRMED,
+    VISIT_REMINDER_SENT,
+    VISIT_COMPLETED,
+    REPORT_PENDING,
+    REPORT_UPLOADED,
+    REPORT_VERIFIED,
+    RESCHEDULED,
+    CANCELLED
+}

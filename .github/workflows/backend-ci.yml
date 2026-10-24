@@ -1,0 +1,73 @@
+name: Backend CI Pipeline
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-ci.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-ci.yml'
+
+jobs:
+  backend-test:
+    name: Build & Verify Spring Boot Backend
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: aicte_db
+          POSTGRES_USER: aicte_user
+          POSTGRES_PASSWORD: aicte_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Make Maven Wrapper Executable
+        run: |
+          if [ -f backend/mvnw ]; then
+            chmod +x backend/mvnw
+          fi
+
+      - name: Build and Run Backend Tests
+        run: |
+          cd backend
+          if [ -f mvnw ]; then
+            ./mvnw clean verify -B
+          else
+            mvn clean verify -B
+          fi
+        env:
+          DATABASE_URL: jdbc:postgresql://localhost:5432/aicte_db
+          DATABASE_USERNAME: aicte_user
+          DATABASE_PASSWORD: aicte_password
+          JWT_SECRET: ci-test-jwt-secret-key-minimum-32-characters-long
+          AI_SERVICE_MODE: mock
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-surefire-reports
+          path: backend/target/surefire-reports/
+          retention-days: 7

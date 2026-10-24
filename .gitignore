@@ -1,0 +1,47 @@
+# Secrets and environment variables
+.env
+.env.*
+!.env.example
+secrets/
+private/
+*.pem
+*.key
+*.crt
+credentials.json
+
+# Build outputs
+target/
+dist/
+build/
+coverage/
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.DS_Store
+Thumbs.db
+
+# Storage and logs
+uploads/
+storage/
+logs/
+*.log
+docker-data/
+minio-data/
+postgres-data/
+
+# OS temporary files
+*.tmp
+*.bak
+*.swp

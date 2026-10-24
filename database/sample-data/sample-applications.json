@@ -1,0 +1,38 @@
+[
+  {
+    "id": "c1111111-1111-1111-1111-111111111111",
+    "applicationNumber": "AICTE-2024-001",
+    "institutionCode": "ABC-ENG-001",
+    "category": "NEW_INSTITUTION",
+    "currentStage": "SCRUTINY",
+    "status": "IN_PROGRESS",
+    "academicYear": "2024-25",
+    "programName": "B.Tech Computer Science",
+    "intakeRequested": 120,
+    "remarks": "Application for new engineering college"
+  },
+  {
+    "id": "c2222222-2222-2222-2222-222222222222",
+    "applicationNumber": "AICTE-2024-002",
+    "institutionCode": "XYZ-POLY-001",
+    "category": "EXTENSION_OF_APPROVAL",
+    "currentStage": "DEFICIENCY_RAISED",
+    "status": "IN_PROGRESS",
+    "academicYear": "2024-25",
+    "programName": "Diploma in Mechanical Engineering",
+    "intakeRequested": 60,
+    "remarks": "Extension of approval for existing polytechnic"
+  },
+  {
+    "id": "c3333333-3333-3333-3333-333333333333",
+    "applicationNumber": "AICTE-2024-003",
+    "institutionCode": "PQR-MBA-001",
+    "category": "INCREASE_IN_INTAKE",
+    "currentStage": "EVC_REPORT_PENDING",
+    "status": "IN_PROGRESS",
+    "academicYear": "2024-25",
+    "programName": "MBA General Management",
+    "intakeRequested": 60,
+    "remarks": "Increase in intake for MBA program"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "a1111111-1111-1111-1111-111111111111",
+    "name": "ABC Engineering College",
+    "code": "ABC-ENG-001",
+    "address": "123 College Road",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "pincode": "400001",
+    "phone": "022-12345678",
+    "email": "principal@abc.edu",
+    "website": "https://abc.edu",
+    "type": "ENGINEERING",
+    "status": "ACTIVE"
+  },
+  {
+    "id": "a2222222-2222-2222-2222-222222222222",
+    "name": "XYZ Polytechnic Institute",
+    "code": "XYZ-POLY-001",
+    "address": "456 Institute Avenue",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "pincode": "411001",
+    "phone": "020-87654321",
+    "email": "director@xyz.edu",
+    "website": "https://xyz.edu",
+    "type": "POLYTECHNIC",
+    "status": "ACTIVE"
+  },
+  {
+    "id": "a3333333-3333-3333-3333-333333333333",
+    "name": "PQR Management Institute",
+    "code": "PQR-MBA-001",
+    "address": "789 Management Street",
+    "city": "Nagpur",
+    "state": "Maharashtra",
+    "pincode": "440001",
+    "phone": "0712-11111111",
+    "email": "dean@pqr.edu",
+    "website": "https://pqr.edu",
+    "type": "MANAGEMENT",
+    "status": "ACTIVE"
+  }
+]

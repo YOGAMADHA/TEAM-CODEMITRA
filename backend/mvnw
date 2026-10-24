@@ -1,0 +1,30 @@
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# Maven Wrapper Startup Script for POSIX platforms
+# ----------------------------------------------------------------------------
+
+set -e
+
+# Resolve PRG to its true destination
+PRG="$0"
+while [ -h "$PRG" ] ; do
+  ls=`ls -ld "$PRG"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '/.*' > /dev/null; then
+    PRG="$link"
+  else
+    PRG=`dirname "$PRG"`"/$link"
+  fi
+done
+
+DIRNAME=`dirname "$PRG"`
+BASEDIR=`cd "$DIRNAME" && pwd`
+
+# Check for native mvn command first as fallback
+if command -v mvn >/dev/null 2>&1; then
+    exec mvn "$@"
+fi
+
+# Fallback to downloading or running with Java
+echo "Native Maven not found. Please install Apache Maven 3.9+ or Java 21."
+exit 1

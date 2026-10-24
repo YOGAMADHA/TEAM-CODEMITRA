@@ -1,0 +1,62 @@
+name: Security & Dependency Scan
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  schedule:
+    - cron: '0 0 * * 1' # Weekly scan
+
+jobs:
+  secret-scan:
+    name: Secret Detection & Credential Leak Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Gitleaks Secret Scanner
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+  backend-dependency-check:
+    name: Backend Dependency Vulnerability Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Run OWASP Dependency Check
+        run: |
+          cd backend
+          mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=8 -DskipProvidedScope=true || echo "OWASP check completed with warnings"
+        continue-on-error: true
+
+  frontend-audit:
+    name: Frontend npm Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run npm audit
+        run: |
+          cd frontend
+          npm audit --audit-level=high || echo "npm audit flagged high severity advisories"
+        continue-on-error: true
