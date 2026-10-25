@@ -32,6 +32,9 @@ public class CustomUserDetails implements UserDetails {
         if (user.getRoles() != null) {
             user.getRoles().forEach(role -> {
                 auths.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+                if ("SYSTEM_ADMINISTRATOR".equalsIgnoreCase(role.getName())) {
+                    auths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                }
                 if (role.getPermissions() != null) {
                     role.getPermissions().forEach(permission ->
                             auths.add(new SimpleGrantedAuthority(permission.getName()))

@@ -112,6 +112,9 @@ public class AuthService {
         if (user.getRoles() != null) {
             user.getRoles().forEach(r -> {
                 permissions.add("ROLE_" + r.getName());
+                if ("SYSTEM_ADMINISTRATOR".equalsIgnoreCase(r.getName())) {
+                    permissions.add("ROLE_ADMIN");
+                }
                 if (r.getPermissions() != null) {
                     r.getPermissions().forEach(p -> permissions.add(p.getName()));
                 }
