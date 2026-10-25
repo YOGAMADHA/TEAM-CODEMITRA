@@ -64,17 +64,17 @@ class ApplicationServiceTest {
 
         user = new User();
         user.setId(userId);
-        user.setUsername("test_applicant");
-        user.setInstitution(institution);
+        user.setEmail("test_applicant@example.com");
     }
 
     @Test
     @DisplayName("Should create application with valid data")
     void shouldCreateApplicationWithValidData() {
         CreateApplicationRequest request = new CreateApplicationRequest();
+        request.setInstitutionId(institutionId);
         request.setCategory("NEW_INSTITUTION");
         request.setProgramName("B.Tech Computer Science");
-        request.setIntakeRequested(120);
+        request.setIntakeSanctioned(120);
         request.setAcademicYear("2024-25");
 
         Application savedApplication = new Application();
