@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:16-alpine
@@ -22,7 +20,7 @@ services:
       - aicte-network
 
   minio:
-    image: minio/minio:latest
+    image: quay.io/minio/minio:latest
     container_name: aicte-minio
     restart: always
     command: server /data --console-address ":9001"
@@ -43,7 +41,7 @@ services:
       - aicte-network
 
   mailhog:
-    image: mailhog/mailhog:latest
+    image: axllent/mailpit:latest
     container_name: aicte-mailhog
     restart: always
     ports:
