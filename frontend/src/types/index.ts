@@ -676,3 +676,55 @@ export interface SummaryReport {
   applicationsByStage: Record<ApplicationStage, number>;
   applicationsByCategory: Record<string, number>;
 }
+
+// ─── DTO Compatibility Aliases ────────────────────────────────────────────────
+export type ApplicationDto = Application;
+export type ApplicationStageHistoryDto = ApplicationStageHistory;
+export type StageTransitionRequest = TransitionRequest;
+export type AuthResponse = LoginResponse;
+export type UserDto = User;
+export type ComplianceItemDto = ComplianceItem;
+export type CreateComplianceItemRequest = CreateComplianceRequest;
+export interface CreateDeadlineRequest {
+  applicationId: number;
+  stage: ApplicationStage;
+  description: string;
+  dueDate: string;
+}
+export type DeadlineDto = Deadline;
+export interface CreateDeficiencyResponseRequest {
+  responseText: string;
+  documentId?: number;
+}
+export type DeficiencyDto = Deficiency;
+export type DeficiencyResponseDto = DeficiencyResponse;
+export type ReviewDeficiencyRequest = DeficiencyReviewRequest;
+export type DocumentChecklistDto = DocumentChecklist;
+export type DocumentDto = Document;
+export type VerifyDocumentRequest = DocumentVerifyRequest;
+export interface CreateEscalationRequest {
+  applicationId: number;
+  level: EscalationLevel;
+  reason: string;
+  assignedToId?: number;
+}
+export type EscalationDto = Escalation;
+export type CreateEvcVisitRequest = CreateEvcRequest;
+export type EvcMemberDto = EvcMember;
+export type EvcVisitDto = EvcVisit;
+export type RescheduleEvcRequest = RescheduleRequest;
+export type VerifyEvcReportRequest = VerifyReportRequest;
+export type InstitutionDto = Institution;
+export type NotificationDto = Notification;
+export type ApplicationSummaryDto = SummaryReport;
+export type PendencyReportDto = PendencyReport;
+export type PerformanceReportDto = PerformanceReport;
+
+// ─── MUI Module Augmentations ────────────────────────────────────────────────
+declare module '@mui/material/TableCell' {
+  interface TableCellProps {
+    fontWeight?: number | string;
+  }
+}
+
+

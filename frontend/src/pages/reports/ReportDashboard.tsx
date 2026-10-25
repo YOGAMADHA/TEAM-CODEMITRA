@@ -181,15 +181,15 @@ export const ReportDashboard: React.FC = () => {
                 <Table size="small">
                   <TableHead>
                     <TableRow sx={{ backgroundColor: 'grey.50' }}>
-                      <TableCell fontWeight={600}>Application #</TableCell>
-                      <TableCell fontWeight={600}>Stage</TableCell>
-                      <TableCell fontWeight={600}>Due Date</TableCell>
+                      <TableCell sx={{ fontWeight: 600 }}>Application #</TableCell>
+                      <TableCell sx={{ fontWeight: 600 }}>Stage</TableCell>
+                      <TableCell sx={{ fontWeight: 600 }}>Due Date</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {overdue.map((a) => (
                       <TableRow key={a.id} hover>
-                        <TableCell fontWeight={600}>{a.applicationNumber}</TableCell>
+                        <TableCell sx={{ fontWeight: 600 }}>{a.applicationNumber}</TableCell>
                         <TableCell><StatusChip status={a.currentStage} /></TableCell>
                         <TableCell sx={{ color: 'error.main', fontWeight: 600 }}>
                           {a.dueDate ? new Date(a.dueDate).toLocaleDateString() : '—'}
