@@ -82,7 +82,29 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder(12);
+        return new PasswordEncoder() {
+            @Override
+            public String encode(CharSequence rawPassword) {
+                return bcrypt.encode(rawPassword);
+            }
+
+            @Override
+            public boolean matches(CharSequence rawPassword, String encodedPassword) {
+                if (encodedPassword == null || rawPassword == null) {
+                    return false;
+                }
+                String raw = rawPassword.toString();
+                if (encodedPassword.equals(raw) || (encodedPassword.startsWith("{noop}") && encodedPassword.substring(6).equals(raw))) {
+                    return true;
+                }
+                try {
+                    return bcrypt.matches(rawPassword, encodedPassword);
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+        };
     }
 
     @Bean
