@@ -15,8 +15,8 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 RUN apk add --no-cache curl
 
-# Create non-root system user
-RUN addgroup -S aicte && adduser -S aicte -G aicte
+# Create non-root system user and storage directory
+RUN addgroup -S aicte && adduser -S aicte -G aicte && mkdir -p /app/uploads && chown -R aicte:aicte /app
 USER aicte:aicte
 
 COPY --from=builder /app/target/*.jar app.jar
