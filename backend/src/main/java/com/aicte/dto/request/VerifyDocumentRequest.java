@@ -18,4 +18,8 @@ public class VerifyDocumentRequest {
     private String verificationStatus;
 
     private String remarks;
+
+    public String getStatus() {
+        return verificationStatus;
+    }
 }

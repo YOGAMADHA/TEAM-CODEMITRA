@@ -230,7 +230,7 @@ public class ApplicationService {
         Application saved = applicationRepository.save(app);
 
         // Deactivate previous assignments
-        assignmentRepository.findByApplicationIdAndActiveTrue(id).forEach(a -> {
+        assignmentRepository.findByApplicationIdAndActiveTrue(id).ifPresent(a -> {
             a.setActive(false);
             assignmentRepository.save(a);
         });
