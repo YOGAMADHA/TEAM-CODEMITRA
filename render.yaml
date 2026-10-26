@@ -5,7 +5,6 @@ databases:
     user: aicte_user
 
 services:
-  # ── Backend (Spring Boot) ─────────────────────────────────────────────────
   - type: web
     name: aicte-backend
     plan: free
@@ -49,7 +48,6 @@ services:
       - key: UPLOAD_DIR
         value: "/app/uploads"
 
-  # ── Frontend (React/Vite → Nginx) ─────────────────────────────────────────
   - type: web
     name: aicte-frontend
     plan: free
