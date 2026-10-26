@@ -1,5 +1,5 @@
 server:
-  port: 
+  port: 8080
   error:
     include-message: never
     include-stacktrace: never
