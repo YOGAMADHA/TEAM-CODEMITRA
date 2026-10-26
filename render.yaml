@@ -1,1 +1,65 @@
-# Render configuration for AICTE Approval Workflow Management System (backend and frontend services) on Render.com. This file should be placed at the root of your repository (e.g., C:/Users/yogar/.gemini/antigravity/scratch/aicte-approval-workflow/render.yaml). It defines the backend and frontend services, a managed PostgreSQL instance, and required secret references. Adjust paths and service names if your project layout differs. See the accompanying .env.example for expected environment variables.
+databases:
+  - name: aicte-db
+    plan: free
+    databaseName: aicte_db
+    user: aicte_user
+
+services:
+  # ── Backend (Spring Boot) ─────────────────────────────────────────────────
+  - type: web
+    name: aicte-backend
+    plan: free
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    healthCheckPath: /actuator/health
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: aicte-db
+          property: connectionString
+      - key: DATABASE_USERNAME
+        fromDatabase:
+          name: aicte-db
+          property: user
+      - key: DATABASE_PASSWORD
+        fromDatabase:
+          name: aicte-db
+          property: password
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRATION_MS
+        value: "86400000"
+      - key: JWT_REFRESH_EXPIRATION_MS
+        value: "604800000"
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: MAIL_HOST
+        value: "smtp.gmail.com"
+      - key: MAIL_PORT
+        value: "587"
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: AI_SERVICE_MODE
+        value: "mock"
+      - key: AI_API_KEY
+        value: ""
+      - key: UPLOAD_DIR
+        value: "/app/uploads"
+
+  # ── Frontend (React/Vite → Nginx) ─────────────────────────────────────────
+  - type: web
+    name: aicte-frontend
+    plan: free
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: BACKEND_HOST
+        fromService:
+          name: aicte-backend
+          type: web
+          property: host
