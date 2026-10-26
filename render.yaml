@@ -32,13 +32,13 @@ services:
       - key: JWT_REFRESH_EXPIRATION_MS
         value: "604800000"
       - key: CORS_ALLOWED_ORIGINS
-        sync: false
+        value: "*"
       - key: MAIL_HOST
         value: "smtp.gmail.com"
       - key: MAIL_PORT
         value: "587"
       - key: MAIL_USERNAME
-        sync: false
+        value: "demo@gmail.com"
       - key: MAIL_PASSWORD
         sync: false
       - key: AI_SERVICE_MODE

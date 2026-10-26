@@ -17,10 +17,15 @@ RUN apk add --no-cache curl
 
 # Create non-root system user and storage directory
 RUN addgroup -S aicte && adduser -S aicte -G aicte && mkdir -p /app/uploads && chown -R aicte:aicte /app
+
+# Copy entrypoint script (must be done as root before switching user)
+COPY --chmod=755 docker-entrypoint.sh /app/docker-entrypoint.sh
+
 USER aicte:aicte
 
 COPY --from=builder /app/target/*.jar app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
+# Use the entrypoint script to convert Render's postgres:// URL to JDBC format
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
