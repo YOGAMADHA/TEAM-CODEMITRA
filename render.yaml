@@ -58,8 +58,5 @@ services:
     healthCheckPath: /
     autoDeploy: true
     envVars:
-      - key: BACKEND_HOST
-        fromService:
-          name: aicte-backend
-          type: web
-          property: host
+      - key: VITE_BACKEND_URL
+        value: https://aicte-backend-bs8n.onrender.com
